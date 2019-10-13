@@ -22,10 +22,34 @@ public class InsertSortTest {
     }
 
     @Test
-    public void complexityOfInsertSort() {
+    public void complexityOfInsertSortOnDistinctArray() {
         calculateComplexity(n ->
                 averageSortArray(50,
                         () -> RandomUtils.shuffledDistinctArray(n),
+                        InsertSort::insertSort)
+        ).ifPresentOrElse(
+                complexity -> System.out.println("Complexity of Insert Sort is: " + complexity.toString()),
+                () -> System.out.println("Failed to determinate complexity of algorithm")
+        );
+    }
+
+    @Test
+    public void complexityOfInsertSortOnDistinctSortedArray() {
+        calculateComplexity(n ->
+                averageSortArray(50,
+                        () -> RandomUtils.distinctSortedArray(n),
+                        InsertSort::insertSort)
+        ).ifPresentOrElse(
+                complexity -> System.out.println("Complexity of Insert Sort is: " + complexity.toString()),
+                () -> System.out.println("Failed to determinate complexity of algorithm")
+        );
+    }
+
+    @Test
+    public void complexityOfInsertSortOnDistinctSortedReversedArray() {
+        calculateComplexity(n ->
+                averageSortArray(50,
+                        () -> RandomUtils.distinctReverseSortedArray(n),
                         InsertSort::insertSort)
         ).ifPresentOrElse(
                 complexity -> System.out.println("Complexity of Insert Sort is: " + complexity.toString()),

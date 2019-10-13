@@ -39,4 +39,11 @@ public class RandomUtils {
         }
         return a;
     }
+
+    public static int[] distinctReverseSortedArray(int size) {
+        return IntStream
+                .range(0, size)
+                .map(a -> size - a)
+                .toArray();
+    }
 }

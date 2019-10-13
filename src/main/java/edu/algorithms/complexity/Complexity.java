@@ -1,27 +1,18 @@
 package edu.algorithms.complexity;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor
+@Getter
 public class Complexity {
 
-    public static Duration executeAndMeasure(Runnable r) {
-        Instant begin = Instant.now();
-        r.run();
-        return Duration.between(begin, Instant.now());
-    }
+    ComplexityLevel level;
+    Double koof;
 
-    public static Duration averageSortArray(int count, Supplier<int[]> sourceArraySupplier, Consumer<int[]> sorter) {
-        Duration totalDuration = Duration.ZERO;
-        for (int i = 0; i < count; i++) {
-            int[] a = sourceArraySupplier.get();
-            Duration cycleDuration = executeAndMeasure(() -> sorter.accept(a));
-            System.out.printf("%d - %dms%n", i, cycleDuration.toMillis());
-            totalDuration = totalDuration.plus(cycleDuration);
-        }
-        return totalDuration.dividedBy(count);
+    @Override
+    public String toString() {
+        return String.format("%s %s", Math.round(koof * 1000.0) / 1000.0, level.name());
     }
 
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static edu.algorithms.complexity.Complexity.averageSortArray;
+import static edu.algorithms.complexity.ComplexityUtils.averageSortArray;
+import static edu.algorithms.complexity.ComplexityUtils.calculateComplexity;
+
 
 public class InsertSortTest {
 
@@ -17,6 +19,18 @@ public class InsertSortTest {
                         InsertSort::insertSort
                 );
         System.out.printf("Duration %s ms", insertSortDuration.toMillis());
+    }
+
+    @Test
+    public void complexityOfInsertSort() {
+        calculateComplexity(n ->
+                averageSortArray(50,
+                        () -> RandomUtils.shuffledDistinctArray(n),
+                        InsertSort::insertSort)
+        ).ifPresentOrElse(
+                complexity -> System.out.println("Complexity of Insert Sort is: " + complexity.toString()),
+                () -> System.out.println("Failed to determinate complexity of algorithm")
+        );
     }
 
 }

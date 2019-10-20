@@ -9,10 +9,11 @@ import java.util.function.Supplier;
 
 public class CompareAlgorithms {
 
-    public static void compare(int count, Supplier<int[]> sourceArraySupplier, Consumer<int[]> algoA, Consumer<int[]> algoB) {
+    public static void compare(int count, Supplier<int[]> sourceArraySupplier, String[] names, Consumer<int[]>... algorithms) {
         int[] arr = sourceArraySupplier.get();
-        Duration durationA = ComplexityUtils.averageSortArray(count, () -> Arrays.copyOf(arr, arr.length), algoA);
-        Duration durationB = ComplexityUtils.averageSortArray(count, () -> Arrays.copyOf(arr, arr.length), algoB);
-        System.out.printf("Algorithm A : %d ms VS Algorithm B: %d ms %n %s %n", durationA.toMillis(), durationB.toMillis(), (double) durationA.toMillis() / durationB.toMillis());
+        for (int i = 0; i < algorithms.length; i++) {
+            Duration duration = ComplexityUtils.averageSortArray(count, () -> Arrays.copyOf(arr, arr.length), algorithms[i]);
+            System.out.printf("%s: %d msec%n", names[i], duration.toMillis());
+        }
     }
 }

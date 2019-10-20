@@ -26,7 +26,6 @@ public class ComplexityUtils {
         for (int i = 0; i < count; i++) {
             int[] a = sourceArraySupplier.get();
             Duration cycleDuration = executeAndMeasure(() -> sorter.accept(a));
-            System.out.printf("%d_%d - %dms%n", a.length, i, cycleDuration.toMillis());
             totalDuration = totalDuration.plus(cycleDuration);
         }
         return totalDuration.dividedBy(count);

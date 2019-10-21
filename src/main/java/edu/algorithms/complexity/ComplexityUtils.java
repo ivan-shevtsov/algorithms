@@ -15,6 +15,9 @@ import java.util.stream.Stream;
 
 public class ComplexityUtils {
 
+    public static final int COMPLEXITY_ANALYZE_STEP = 10_000;
+    public static final double COMPLEXITY_DELTA = 5.0;
+
     public static Duration executeAndMeasure(Runnable r) {
         Instant begin = Instant.now();
         r.run();
@@ -36,7 +39,7 @@ public class ComplexityUtils {
         IntStream.rangeClosed(1, 5)
                 .parallel()
                 .forEach(index -> {
-                    int N = index * 10_000;
+                    int N = index * COMPLEXITY_ANALYZE_STEP;
                     durations[index - 1] = avarageExecution.apply(N);
                 });
 
@@ -47,9 +50,9 @@ public class ComplexityUtils {
     }
 
     private static Complexity complexityWithCooficient(ComplexityLevel complexityLevel, Duration[] durations) {
-        Double[] kooficients = new Double[5];
-        for (int i = 1; i <= 5; i++) {
-            int n = i * 10_000;
+        Double[] kooficients = new Double[durations.length];
+        for (int i = 1; i <= durations.length; i++) {
+            int n = i * COMPLEXITY_ANALYZE_STEP;
             kooficients[i - 1] = ((double) durations[i - 1].toNanos()) / complexityLevel.baseFunction.apply(n);
         }
 
@@ -58,7 +61,7 @@ public class ComplexityUtils {
         double minKoof = ArrayUtils.min(kooficients);
         double maxKoof = ArrayUtils.max(kooficients);
 
-        if (Math.abs(maxKoof - minKoof) < 0.5) {
+        if (Math.abs(maxKoof - minKoof) < COMPLEXITY_DELTA) {
             return new Complexity(complexityLevel, (maxKoof + minKoof) / 2.0);
         }
 

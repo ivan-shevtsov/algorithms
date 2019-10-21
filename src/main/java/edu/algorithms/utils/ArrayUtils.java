@@ -38,4 +38,27 @@ public class ArrayUtils {
         return a < b;
     }
 
+    public static void mergeInPlace(int[] a, int[] buffer, int firstFrom, int secondFrom, int secondTo) {
+        copy(a, buffer, firstFrom, secondTo);
+        int left = firstFrom;
+        int right = secondFrom;
+        for (int i = firstFrom; i <= secondTo; i++) {
+            if (left >= secondFrom) {
+                a[i] = buffer[right++];
+            } else if (right > secondTo) {
+                a[i] = buffer[left++];
+            } else if (less(buffer[left], buffer[right])) {
+                a[i] = buffer[left++];
+            } else {
+                a[i] = buffer[right++];
+            }
+        }
+    }
+
+    public static void copy(int[] a, int[] buffer, int from, int to) {
+        for (int i = from; i <= to; i++) {
+            buffer[i] = a[i];
+        }
+    }
+
 }

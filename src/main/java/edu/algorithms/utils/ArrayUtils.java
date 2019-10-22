@@ -1,5 +1,7 @@
 package edu.algorithms.utils;
 
+import java.util.Comparator;
+
 public class ArrayUtils {
 
     public static <T> void exchange(T[] massive, int index1, int index2) {
@@ -38,14 +40,18 @@ public class ArrayUtils {
         return a < b;
     }
 
-    public static void mergeInPlace(int[] a, int[] buffer, int firstFrom, int secondFrom, int secondTo) {
-        copy(a, buffer, firstFrom, secondTo);
-        int left = firstFrom;
-        int right = secondFrom;
-        for (int i = firstFrom; i <= secondTo; i++) {
-            if (left >= secondFrom) {
+    public static <T extends Comparable> boolean less(T a, T b) {
+        return a.compareTo(b) < 0;
+    }
+
+    public static void mergeInPlace(int[] a, int[] buffer, int lo, int mi, int hi) {
+        copy(a, buffer, lo, hi);
+        int left = lo;
+        int right = mi;
+        for (int i = lo; i <= hi; i++) {
+            if (left >= mi) {
                 a[i] = buffer[right++];
-            } else if (right > secondTo) {
+            } else if (right > hi) {
                 a[i] = buffer[left++];
             } else if (less(buffer[left], buffer[right])) {
                 a[i] = buffer[left++];

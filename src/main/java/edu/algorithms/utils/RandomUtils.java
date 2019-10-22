@@ -34,10 +34,14 @@ public class RandomUtils {
 
     public static int[] shuffledDistinctArray(int size, int shuffleCount) {
         int[] a = distinctSortedArray(size);
-        for (int i = 0; i < shuffleCount; i++) {
-            exchange(a, randomInt(size), randomInt(size));
-        }
+        shuffleArray(shuffleCount, a);
         return a;
+    }
+
+    public static void shuffleArray(int shuffleCount, int[] a) {
+        for (int i = 0; i < shuffleCount; i++) {
+            exchange(a, randomInt(a.length), randomInt(a.length));
+        }
     }
 
     public static int[] distinctReverseSortedArray(int size) {

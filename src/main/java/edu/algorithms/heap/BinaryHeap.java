@@ -31,6 +31,27 @@ public class BinaryHeap<T extends Comparable> {
         }
     }
 
+    /**
+     * The weight of Element at some position was decreased - it should sink down the heap
+     * @param k
+     */
+    private void sink(int k) {
+        int minChild = minBetweenChildren(k);
+        if (minChild > 0) {
+            exchange(keys, minChild, k);
+            sink(minChild);
+        }
+    }
+
+    private int minBetweenChildren(int k) {
+        if (k * 2 == size) {
+            return k * 2;
+        } else if (k * 2 + 1 >= size) {
+            return keys[k * 2 + 1].compareTo(keys[k * 2]) > 0 ? k * 2 : k * 2 + 1;
+        }
+        return 0;
+    }
+
     public T[] getKeys() {
         return Arrays.copyOf(keys, keys.length);
     }

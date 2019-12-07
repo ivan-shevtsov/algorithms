@@ -20,14 +20,16 @@ public class CompareSortTest {
                         "Shell Sort",
                         "Up-Down Merge",
                         "Down-Up Merge",
-                        "Quick Sort"
+                        "Quick Sort",
+                        "Heap Sort"
                 },
                 InsertSort::insertSort,
                 SelectSort::selectSort,
                 ShellSort::shellSort,
                 MergeSort::mergeSortUpDown,
                 MergeSort::mergeSortDownUp,
-                QuickSort::quickSort);
+                QuickSort::quickSort,
+                HeapSort::heapSort);
     }
 
     @Test
@@ -40,14 +42,16 @@ public class CompareSortTest {
                         "Shell Sort",
                         "Up-Down Merge",
                         "Down-Up Merge",
-                        "Quick Sort"
+                        "Quick Sort",
+                        "Heap Sort"
                 },
                 InsertSort::insertSort,
                 SelectSort::selectSort,
                 ShellSort::shellSort,
                 MergeSort::mergeSortUpDown,
                 MergeSort::mergeSortDownUp,
-                QuickSort::quickSort);
+                QuickSort::quickSort,
+                HeapSort::heapSort);
     }
 
     @Test
@@ -60,13 +64,15 @@ public class CompareSortTest {
                         "Shell Sort",
                         "Up-Down Merge",
                         "Down-Up Merge",
-                        "Quick Sort"
+                        "Quick Sort",
+                        "Heap Sort"
                 },
                 InsertSort::insertSort,
                 SelectSort::selectSort,
                 ShellSort::shellSort,
                 MergeSort::mergeSortUpDown,
                 MergeSort::mergeSortDownUp,
-                QuickSort::quickSort);
+                QuickSort::quickSort,
+                HeapSort::heapSort);
     }
 }
